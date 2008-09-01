@@ -95,7 +95,8 @@ int main (int argc, char *argv[]) {
 	if ((argc - optind) == 1) {
 		hostaddr = GetHostInfo((char *)argv[optind]);
 	} else {
-		hostaddr = htonl (0x7F000001);
+        fprintf(stderr, "Hostname or IP is required\n\n");
+        PrintUsage();
 	}
 	
 	/* Get Username from effecive user id running the program */
