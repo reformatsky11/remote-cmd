@@ -1,0 +1,49 @@
+This application will take a single command 
+in the fashion of ssh {host} {command}
+or a file containing a list of commands and login to a remote host via SSH
+using RSA keys or password, and run each command.
+
+
+Valid Arguments:
+    -d turns on DEBUG and displays the commands sent to the client to STDOUT
+    -h displays the Usage Statement and exits RC 255
+    -p Causes the application to pause and prompt user to hit Enter When errors are encountered in the commands run on the client
+    -v turns on Verbose mode, will display STDOUT and STDERR for each command run on the destination client.
+    -s specifies skip errors that meet regexp(s) in {errfile}
+    -e specifies file of environment variables to set on remote side
+    -t specifies connection timeout in seconds DEFAULTS to 5 seconds
+    -T {n} this will enable tracing at level 'n'
+    -P This will allocate a controlling PTY on the session
+    -c {command}  specifies a single command to run on the destination client
+    -f {filename} specifies a file containing commands to run on the destination client
+    {HOSTNAME} this is the destination client hostname or IP address
+
+RETURN CODES:
+    exits with RC 255 on a usage error
+    exits with RC -1 on all other errors
+    exits with RC 0 upon successful execution
+
+Prerequisites:
+    openssl http://www.openssl.org/
+    libssh2 http://www.libssh2.org/
+
+Command File Syntax:
+    Commands in the command file should be 1 command per line
+    you can use standard \ escaping to concatinate multiple lines into one
+
+    These commands will follow the same rules as 'ssh {host} {command}'
+    take care with nohup and backgrounding commands.
+
+Skip File Syntax:
+    Expressions in this file will not cause the script to display STDERR output
+    for the commands and the -p option will be ignored if the expression
+        matches any part of the STDERR output from command
+
+    For example:
+    .*mount.*  
+    will cause the application to skip all STDERRs for both mount and unmount.
+    like umount: {dir} not mounted
+    and mount: {dir} not in fstab
+
+    cannot remove .*: No such file or directory
+       will match any standard rm error about the target not existing.
