@@ -41,6 +41,8 @@ LIBSSH2_SESSION   *session;
 char              *username, *password, *appname, *cmderr;
 char              *errfile, *envfilenm, *termtype;
 char              rsapubkey[MAXLEN], rsaprivkey[MAXLEN];
+char              dsapubkey[MAXLEN], dsaprivkey[MAXLEN];
+char              idpubkey[MAXLEN], idprivkey[MAXLEN];
 int               sock, debug, verbose, errpause, skiperr, allocpty, envfl;
 int               tracelvl, enable_trace, set_non_blocking;
 struct termios    saved_attributes;

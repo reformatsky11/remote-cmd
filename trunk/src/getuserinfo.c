@@ -32,6 +32,10 @@ void GetUserInfo() {
 	/* Get RSA Key info from effecive user id */
 	sprintf(rsapubkey,"%s/.ssh/id_rsa.pub",homedir);
 	sprintf(rsaprivkey,"%s/.ssh/id_rsa",homedir);
+	sprintf(dsapubkey,"%s/.ssh/id_dsa.pub",homedir);
+	sprintf(dsaprivkey,"%s/.ssh/id_dsa",homedir);
+	sprintf(idpubkey,"%s/.ssh/identity.pub",homedir);
+	sprintf(idprivkey,"%s/.ssh/identity",homedir);
 	if (debug) {
 		printf ("**DEBUG** RSA PUBKEY = %s\n", rsapubkey);
 		printf ("**DEBUG** RSA PRIVKEY = %s\n", rsaprivkey);
