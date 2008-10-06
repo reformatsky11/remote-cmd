@@ -17,26 +17,30 @@
 #include "remotecmd.h"
 
 void AuthHost() {
-	char *error;
-	char prompt[80];
-	char passenter[80];
-	
-	/* Auth by public key */
-	if (libssh2_userauth_publickey_fromfile
-		(session, username, rsapubkey, rsaprivkey, password)) {
-			/* public key authentication failed
-			 Attempt to authenticate via password */
-			sprintf(prompt,"Enter Password for %s: ",username);
-			strncpy(passenter, getpass(prompt),80);
-			password=trim(passenter);
-			if (libssh2_userauth_password(session, username, password)) {
-				fprintf(stderr,"Authentication failed.\n");
-				libssh2_session_last_error(session, &error, NULL, 0);
-				if (debug)
-					fprintf(stderr,"libssh2_userauth_password: %s\n",error);
-				CleanupSession(session,username);
-			}
-		}
-	return;
+    char *error;
+    char prompt[80];
+    char passenter[80];
+    
+    /* Try Auth by public key */
+    if (libssh2_userauth_publickey_fromfile  /* RSA Key */
+            (session, username, rsapubkey, rsaprivkey, password)
+                && libssh2_userauth_publickey_fromfile  /* DSA Key */
+                    (session, username, dsapubkey, dsaprivkey, password)
+                && libssh2_userauth_publickey_fromfile /* RSA1 Key */
+                    (session, username, idpubkey, idprivkey, password)) {
+        /* public key authentication failed
+        Attempt to authenticate via password */
+        sprintf(prompt,"Enter Password for %s: ",username);
+        strncpy(passenter, getpass(prompt),80);
+        password=trim(passenter);
+        if (libssh2_userauth_password(session, username, password)) {
+            fprintf(stderr,"Authentication failed.\n");
+            libssh2_session_last_error(session, &error, NULL, 0);
+            if (debug)
+                fprintf(stderr,"libssh2_userauth_password: %s\n",error);
+            CleanupSession(session,username);
+        }
+    }
+    return;
 }
 
