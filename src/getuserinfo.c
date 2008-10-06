@@ -39,6 +39,10 @@ void GetUserInfo() {
 	if (debug) {
 		printf ("**DEBUG** RSA PUBKEY = %s\n", rsapubkey);
 		printf ("**DEBUG** RSA PRIVKEY = %s\n", rsaprivkey);
+		printf ("**DEBUG** DSA PUBKEY = %s\n", dsapubkey);
+		printf ("**DEBUG** DSA PRIVKEY = %s\n", dsaprivkey);
+		printf ("**DEBUG** RSA1 PUBKEY = %s\n", idpubkey);
+		printf ("**DEBUG** RSA1 PRIVKEY = %s\n", idprivkey);
 	}
 	
 	return;
