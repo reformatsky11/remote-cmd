@@ -11,7 +11,7 @@ By default the script suppresses stdout, this keeps the bandwidth requirements l
 -----
 
 ==Supported authentication==
-   * RSA key 
+   * RSA, DSA and RSA1(identity) key 
    * password
 
 -----
@@ -41,4 +41,3 @@ By default the script suppresses stdout, this keeps the bandwidth requirements l
 ==Prerequisites==
    * [http://www.openssl.org/ openssl]
    * [http://www.libssh2.org/ libssh2]
-
