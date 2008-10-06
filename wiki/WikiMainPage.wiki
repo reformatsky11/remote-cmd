@@ -11,7 +11,7 @@ By default the script suppresses stdout, this keeps the bandwidth requirements l
 -----
 
 ==Supported authentication==
-   * RSA, DSA and RSA1(identity) key 
+   * RSA, DSA or RSA1(identity) key 
    * password
 
 -----
