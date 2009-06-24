@@ -103,8 +103,8 @@ void RunCommand(char *command) {
 	/* Return channel to Blocking and free */
 	if (set_non_blocking == 1)
 		libssh2_channel_set_blocking (channel, 1); 
-	channel=NULL;
 	CloseChannel(channel);
+	channel=NULL;
 	return;
 }
 
