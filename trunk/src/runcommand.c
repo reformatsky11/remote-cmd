@@ -33,6 +33,9 @@ void RunCommand(char *command) {
 		CleanupSession(session,username);
 	}
 	
+    /* Setup Keepalive to 5 seconds */
+    libssh2_keepalive_config(session, 1, 5);
+
 	/* Force Data to on STDOUT and STDERR to be on seperate channels 
 	 * read individually with *_read and *_read_stderr functions */
 	libssh2_channel_handle_extended_data(channel, 
